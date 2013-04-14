@@ -1,0 +1,23 @@
+{
+    "name": "malenki/codevro",
+    "type": "library",
+    "description": "Check, format and get some information about many types of code.",
+    "keywords": ["Luhn","NIR", "siret", "siren", "RIB", "VAT", "EIN", "SSN", "BIC", "EAN", "IBAN", "ISBN", "ISSN"],
+    "homepage": "https://github.com/malenkiki/codevro.php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michel Petit",
+            "email": "petit.michel@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Malenki": "src"
+        }
+    }
+}
