@@ -24,7 +24,23 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Malenki\Codevro;
 
+/**
+ * Formatable interface.
+ *
+ * Some code have predefined string representation, so this interface allows 
+ * some class to have this behaviour. 
+ * 
+ * @package 
+ * @author Michel Petit <petit.michel@gmail.com> 
+ * @license MIT
+ */
 interface Formatable
 {
+    /**
+     * Formats the current code to its right representation string. 
+     * 
+     * @access public
+     * @return string
+     */
     public function format();
 }

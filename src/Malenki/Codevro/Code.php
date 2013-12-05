@@ -24,12 +24,46 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Malenki\Codevro;
 
+/**
+ * Code basic root class. 
+ * 
+ * This defines the minimal structure to a code, i.e. its value, length, check 
+ * method and string context.
+ *
+ * So, every child class cat get value, get length, do check and has a string behaviour.
+ *
+ * @abstract
+ * @package 
+ * @copyright 2013 Michel Petit
+ * @author Michel Petit <petit.michel@gmail.com> 
+ * @license MIT
+ */
 abstract class Code
 {
+    /**
+     * Stores code's value.
+     * 
+     * @var string
+     * @access protected
+     */
     protected $str_value = null;
+
+    /**
+     * Stores code's length.
+     * 
+     * @var integer
+     * @access protected
+     */
     protected $int_length = 0;
 
 
+    /**
+     * Constructor sets code's value and compute internally its length. 
+     * 
+     * @param string $str 
+     * @access public
+     * @return void
+     */
     public function __construct($str)
     {
         $this->str_value = (string) $str;
@@ -38,19 +72,52 @@ abstract class Code
 
 
 
+    /**
+     * Output code's primitive value.
+     * 
+     * @access public
+     * @return string
+     */
     public function getValue()
     {
         return $this->str_value;
     }
 
+
+
+    /**
+     * Gets the code's length. 
+     * 
+     * @access public
+     * @return integer
+     */
     public function getLength()
     {
         return $this->int_length;
     }
 
 
+
+    /**
+     * Check method signature.
+     *
+     * Every child class must implement this check methods to tests the code.
+     * 
+     * @abstract
+     * @access public
+     * @return boolean
+     */
     abstract public function check();
 
+
+
+
+    /**
+     * How the code must be shown in string context. 
+     * 
+     * @access public
+     * @return string
+     */
     public function __toString()
     {
         return $this->str_value;

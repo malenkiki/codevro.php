@@ -26,6 +26,16 @@ namespace Malenki\Codevro;
 
 use Exception;
 
+/**
+ * Luhn algorithm definition.
+ *
+ * Luhn algorithm is used into many code checking. This is the base algorithm. 
+ * 
+ * @see http://en.wikipedia.org/wiki/Luhn_algorithm
+ * @uses Code
+ * @author Michel Petit <petit.michel@gmail.com> 
+ * @license MIT
+ */
 class Luhn extends Code
 {
 	public function modulo10()
@@ -56,6 +66,12 @@ class Luhn extends Code
 
 
 
+    /**
+     * Check whether the code follows Luhn algorithm or not.
+     * 
+     * @access public
+     * @return boolean
+     */
     public function check()
     {
 	    return ! (boolean) $this->modulo10();
@@ -63,6 +79,16 @@ class Luhn extends Code
 
 
 
+    /**
+     * Computes the check digit for the given string.
+     * 
+     * This creates a check digit for a string.
+     *
+     * @param string $str 
+     * @static
+     * @access public
+     * @return integer
+     */
     public static function computeCheckDigit($str)
     {
         $n = new self($str . '0');
