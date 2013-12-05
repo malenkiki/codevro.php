@@ -30,9 +30,15 @@ use Malenki\Codevro\Luhn;
 
 
 /**
- * Siren 
+ * Siren french code identifies enterprises.
+ *
+ * It is composed of 9 digits, sometimes grouped by 3, and it is checkable 
+ * using the Luhn algorithm.
  * 
- * Exemple de test: 493597579, 732829320
+ * Examples: 493597579, 732829320, 493 597 579, 732 829 320 are OK
+ *
+ * @author Michel Petit <petit.michel@gmail.com> 
+ * @license MIT
  */
 class Siren extends Luhn implements StandardSize
 {

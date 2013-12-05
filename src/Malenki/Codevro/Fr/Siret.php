@@ -28,8 +28,22 @@ use Malenki\Codevro\StandardSize;
 use Malenki\Codevro\Luhn;
 
 /**
+ * Siret is the extended version of french Siren code.
  *
- * Exemple de test: 49359757900025
+ * Like Siren, it is an unique enterprise identifier, its first nine digits are 
+ * the same as the Siren, the others are location/building identifier.
+ * 
+ * Additional digits to the Siren code are like this: `000XK` where `X` starts 
+ * to one for the first building, then it is two for the second and so on. The 
+ * `K` is the check digit.
+ *
+ * This code can be formated without spaces or by using 3 groups of 3 digits and 
+ * one group of 5 digits.
+ *
+ * Example: 49359757900025 and 493 597 579 00025 are OK. 
+ * 
+ * @author Michel Petit <petit.michel@gmail.com> 
+ * @license MIT
  */
 class Siret extends Luhn implements StandardSize
 {

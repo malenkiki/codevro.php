@@ -23,7 +23,22 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace Malenki\Codevro;
 
+/**
+ * Standard size interface to define code having fixed size.
+ * 
+ * @author Michel Petit <petit.michel@gmail.com> 
+ * @license MIT
+ */
 interface StandardSize
 {
+    /**
+     * Checks the code's size.
+     *
+     * Some code have a standard string length, so this method tests whether 
+     * the code's string is equal to this standard size. 
+     * 
+     * @access public
+     * @return boolean
+     */
     public function checkSize();
 }
