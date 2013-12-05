@@ -51,5 +51,19 @@ class Siret extends Luhn implements StandardSize
     {
         return $this->getLength() == 14;
     }
+
+
+
+    public function getSiren()
+    {
+        if($this->check())
+        {
+            return new Siren(substr($this->getValue(), 0, 9));
+        }
+        else
+        {
+            throw new \RuntimeException('Cannont get Siren part form Siret: Siret is not valid!');
+        }
+    }
 }
 
