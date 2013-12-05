@@ -47,6 +47,28 @@ class SiretTest extends PHPUnit_Framework_TestCase
         $s = new Malenki\Codevro\Fr\Siret('4786246040002');
         $this->assertFalse($s->check());
     }
+    
+    
+    public function testExtractSirenOK()
+    {
+        $siret = new Malenki\Codevro\Fr\Siret('49359757900025');
+
+        $this->assertEquals('Malenki\Codevro\Fr\Siren', get_class($siret->getSiren()));
+        $this->assertEquals('493597579', $siret->getSiren()->getValue());
+    }
+
+
+    /**
+     * @expectedException RuntimeException
+     */
+    public function testExtractSirenKO()
+    {
+        $siret = new Malenki\Codevro\Fr\Siret('4935975790002');
+
+        $this->assertEquals('Malenki\Codevro\Fr\Siren', get_class($siret->getSiren()));
+        $this->assertEquals('493597579', $siret->getSiren()->getValue());
+    }
+    
 }
 
 
