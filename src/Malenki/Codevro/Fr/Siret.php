@@ -47,6 +47,11 @@ use Malenki\Codevro\Luhn;
  */
 class Siret extends Luhn implements StandardSize
 {
+    public function __construct($str)
+    {
+        parent::__construct(preg_replace('/[^0-9]/', '', $str));
+    }
+
     public function checkSize()
     {
         return $this->getLength() == 14;

@@ -35,6 +35,12 @@ class SiretTest extends PHPUnit_Framework_TestCase
         
         $s = new Malenki\Codevro\Fr\Siret('47862460400029');
         $this->assertTrue($s->check());
+        
+        $s = new Malenki\Codevro\Fr\Siret('493 597 579 00025');
+        $this->assertTrue($s->check());
+        
+        $s = new Malenki\Codevro\Fr\Siret('478 624 604 00029');
+        $this->assertTrue($s->check());
     }
     
     
@@ -45,6 +51,12 @@ class SiretTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($s->check());
         
         $s = new Malenki\Codevro\Fr\Siret('4786246040002');
+        $this->assertFalse($s->check());
+        
+        $s = new Malenki\Codevro\Fr\Siret('493 597 579 00026');
+        $this->assertFalse($s->check());
+        
+        $s = new Malenki\Codevro\Fr\Siret('478 624 604 0002');
         $this->assertFalse($s->check());
     }
     
