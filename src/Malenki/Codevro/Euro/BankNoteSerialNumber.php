@@ -116,6 +116,11 @@ class BankNoteSerialNumber extends Code implements StandardSize
 
     public function check()
     {
+        if(preg_match('/[A-Z]/', $this->str_value[1]))
+        {
+            throw new \RuntimeException('New serial code is not yet implemented! :-(');
+        }
+
         $str = preg_replace('/[A-Z]/', '', $this->str_value);
 
         $int = array_sum(str_split($str));
