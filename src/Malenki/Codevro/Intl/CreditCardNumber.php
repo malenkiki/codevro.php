@@ -29,6 +29,31 @@ extends \Malenki\Codevro\Luhn
 implements \Malenki\Codevro\Formatable
 {
     /**
+     * Gets Issuer identification number (IIN)
+     * 
+     * @see http://en.wikipedia.org/wiki/Credit_card_number
+     * @access public
+     * @return void
+     */
+    public function getIin()
+    {
+        return substr($this->getValue(), 0, 6);
+    }
+
+
+    /**
+     * Gets Major Industry Identifier (MII) 
+     * 
+     * @see http://en.wikipedia.org/wiki/Credit_card_number
+     * @access public
+     * @return void
+     */
+    public function getMii()
+    {
+        return substr($this->getValue(), 0, 1);
+    }
+
+    /**
      * Formats credit card number by grouping digits by 4 
      * 
      * @access public
