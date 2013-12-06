@@ -28,22 +28,14 @@ class CreditCardNumber
 extends \Malenki\Codevro\Luhn
 implements \Malenki\Codevro\Formatable
 {
+    /**
+     * Formats credit card number by grouping digits by 4 
+     * 
+     * @access public
+     * @return string
+     */
     public function format()
     {
-        $str = '';
-        $arr = str_split($this->str_value);
-
-        foreach($arr as $k => $v)
-        {
-            $k++;
-            $str .= $v;
-
-            if($k % 4 == 0)
-            {
-                $str .= ' ';
-            }
-        }
-
-        return trim($str);
+        return implode(' ', str_split($this->str_value, 4));
     }
 }
