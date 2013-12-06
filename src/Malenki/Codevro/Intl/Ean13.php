@@ -28,6 +28,11 @@ use Malenki\Codevro\StandardSize;
 
 class Ean13 extends Ean implements StandardSize
 {
+    public function __construct($str)
+    {
+        parent::__construct(preg_replace('/[^0-9]/', '', $str));
+    }
+
     public function checkSize()
     {
         return $this->getLength() == 13;
