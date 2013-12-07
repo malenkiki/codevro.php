@@ -40,6 +40,11 @@ use Malenki\Codevro\StandardSize;
  */
 class Nir extends Code implements StandardSize
 {
+    public function __construct($str)
+    {
+        parent::__construct(preg_replace('/[^0-9AB]/', '', $str));
+    }
+
 	/**
      * For Corsica, letters `A` and `B` are in use, so a conversion must be apply to the code:
      *  - replace `A` and `B` letters by digit `0`
