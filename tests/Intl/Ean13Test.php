@@ -28,19 +28,37 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 class Ean13Test extends PHPUnit_Framework_TestCase
 {
 
-    public function testIsbn()
+    public function testIsbnOK()
     {
         $s = new Malenki\Codevro\Intl\Ean13('9782359220223');
         $this->assertTrue($s->isIsbn());
         
         $s = new Malenki\Codevro\Intl\Ean13('978-2359220223');
         $this->assertTrue($s->isIsbn());
-        
+    }
+    
+    public function testIsbnKO()
+    {
         $s = new Malenki\Codevro\Intl\Ean13('3020120022109');
         $this->assertFalse($s->isIsbn());
         
         $s = new Malenki\Codevro\Intl\Ean13('3-02012-002210-9');
         $this->assertFalse($s->isIsbn());
     }
-    
+
+
+    public function testCheckOK()
+    {
+        $s = new Malenki\Codevro\Intl\Ean13('9782359220223');
+        $this->assertTrue($s->check());
+        
+        $s = new Malenki\Codevro\Intl\Ean13('978-2359220223');
+        $this->assertTrue($s->check());
+        
+        $s = new Malenki\Codevro\Intl\Ean13('3020120022109');
+        $this->assertTrue($s->check());
+        
+        $s = new Malenki\Codevro\Intl\Ean13('3-02012-002210-9');
+        $this->assertTrue($s->check());
+    }
 }

@@ -29,6 +29,12 @@ use Malenki\Codevro\Formatable;
 
 class Ean8 extends Ean implements StandardSize, Formatable
 {
+    public function __construct($str)
+    {
+        parent::__construct(preg_replace('/[^0-9]/', '', $str));
+    }
+
+
     public function checkSize()
     {
         return $this->getLength() == 8;
@@ -36,11 +42,7 @@ class Ean8 extends Ean implements StandardSize, Formatable
 
     public function format()
     {
-        return sprintf(
-            '%s-%s', 
-            substr($this->str_value, 0, 4),
-            substr($this->str_value, 4)
-        );
+        return implode('-', str_split($this->str_value, 4));
     }
 }
 
