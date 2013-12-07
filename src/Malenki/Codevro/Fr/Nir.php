@@ -27,18 +27,30 @@ use Malenki\Codevro\Code;
 use Malenki\Codevro\StandardSize;
 
 
+/**
+ * NIR code class.
+ *
+ * **NIR** code stands for **Numéro d’Inscription au Répertoire** also known as 
+ * **Numéro de Sécurité Sociale** and it is unique for each french citizens.
+ *
+ * @see http://fr.wikipedia.org/wiki/Num%C3%A9ro_de_s%C3%A9curit%C3%A9_sociale_en_France
+ * 
+ * @author Michel Petit <petit.michel@gmail.com> 
+ * @license MIT
+ */
 class Nir extends Code implements StandardSize
 {
 	/**
-	 * Pour le cas de la Corse, les lettres A et B sont utilisées, il faut donc
-	 * adapter le nombre.
-	 * 
-	 * Les lettres A et B sont remplacées par un zéro et on soustrait par
-	 * 1 000 000 dans le cas de A et de 2 000 000 dans le cas de B.
+     * For Corsica, letters `A` and `B` are in use, so a conversion must be apply to the code:
+     *  - replace `A` and `B` letters by digit `0`
+     *  - if letter A was used, then substract the code by 1,000,000
+     *  - if letter B was used, then substract the code by 2,000,000
 	 * 
 	 * @param string $str
+     * @return string
 	 */
-	private static function adapt($str){
+    private static function adapt($str)
+    {
 		$substract = 0;
 		
 		if(preg_match('/[Aa]/', $str)){
@@ -53,13 +65,37 @@ class Nir extends Code implements StandardSize
 		return bcsub($int, $substract);
 	}
 	
-	
-	public function check(){
+
+
+    /**
+     * Checks NIR validity.
+     *
+     * @throws \RuntimeException If BC Math PHP module is not available.
+     * @return boolean
+     */
+    public function check()
+    {
+        if(!extension_loaded('bcmath'))
+        {
+            throw new \RuntimeException('You must have `bcmath` module installed in order to use ' . __CLASS__);
+        }
+
 		$key = substr($this->str_value, 13, 2);
-		$str = self::adapt(substr($this->str_value, 0, 13));
+        $str = self::adapt(substr($this->str_value, 0, 13));
+
 	    return ($key == bcsub(97, bcmod($str, 97)));
 	}
 
+
+
+    /**
+     * Checks NIR code length.
+     *
+     * NIR code must have 15 digits.
+     * 
+     * @access public
+     * @return boolean
+     */
     public function checkSize()
     {
         return $this->getLength() == 15;
