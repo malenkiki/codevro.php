@@ -33,7 +33,7 @@ implements \Malenki\Codevro\Formatable
      * 
      * @see http://en.wikipedia.org/wiki/Credit_card_number
      * @access public
-     * @return void
+     * @return string
      */
     public function getIin()
     {
@@ -46,11 +46,37 @@ implements \Malenki\Codevro\Formatable
      * 
      * @see http://en.wikipedia.org/wiki/Credit_card_number
      * @access public
-     * @return void
+     * @return integer
      */
     public function getMii()
     {
-        return substr($this->getValue(), 0, 1);
+        return (integer) substr($this->getValue(), 0, 1);
+    }
+
+
+
+    /**
+     * Gets description of the Major Industry Identifier
+     * 
+     * @access public
+     * @return string
+     */
+    public function getMiiDescription()
+    {
+        $arr = array(
+            0 => 'ISO/TC 68 and other future industry assignments',
+            1 => 'Airlines',
+            2 => 'Airlines and other future industry assignments',
+            3 => 'Travel and entertainment and banking/financial',
+            4 => 'Banking and financial',
+            5 => 'Banking and financial',
+            6 => 'Merchandising and banking/financial',
+            7 => 'Petroleum and other future industry assignments',
+            8 => 'Healthcare, telecommunications and other future industry assignments',
+            9 => 'National assignment'
+        );
+
+        return $arr[$this->getMii()];
     }
 
     /**
