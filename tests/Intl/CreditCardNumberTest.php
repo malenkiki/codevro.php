@@ -43,15 +43,52 @@ class CreditCardNumberTest extends PHPUnit_Framework_TestCase
      */
     public function testIin()
     {
-        $s = new Malenki\Codevro\Intl\CreditCardNumber('378282246310005');
-        $this->assertEquals('378282', $s->getIin());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('378282246310005');
+        $this->assertEquals('378282', $c->getIin());
     }
     
     public function testMii()
     {
-        $s = new Malenki\Codevro\Intl\CreditCardNumber('378282246310005');
-        $this->assertEquals('3', $s->getMii());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('378282246310005');
+        $this->assertEquals('3', $c->getMii());
     }
-    
+
+
+
+    public function testCheckOK()
+    {
+        // use fake valid credit card number used to test Paypal dev
+        // See http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('378282246310005');
+        $this->assertTrue($c->check());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('371449635398431');
+        $this->assertTrue($c->check());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('378734493671000');
+        $this->assertTrue($c->check());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('5610591081018250');
+        $this->assertTrue($c->check());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('30569309025904');
+        $this->assertTrue($c->check());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('38520000023237');
+        $this->assertTrue($c->check());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('6011111111111117');
+        $this->assertTrue($c->check());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('6011000990139424');
+        $this->assertTrue($c->check());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('3530111333300000');
+        $this->assertTrue($c->check());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('3566002020360505');
+        $this->assertTrue($c->check());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('5555555555554444');
+        $this->assertTrue($c->check());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('5105105105105100');
+        $this->assertTrue($c->check());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('4111111111111111');
+        $this->assertTrue($c->check());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('4012888888881881');
+        $this->assertTrue($c->check());
+        $c = new Malenki\Codevro\Intl\CreditCardNumber('4222222222222');
+        $this->assertTrue($c->check());
+    }
 }
 
