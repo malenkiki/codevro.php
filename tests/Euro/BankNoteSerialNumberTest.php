@@ -27,8 +27,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 class BankNoteSerialNumberTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testInstanciateKO()
+    {
+        $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('');
+    }
 
-    public function testCheckOK()
+
+
+    public function testChecki1stSeriesOK()
     {
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('U23762095871');
         $this->assertTrue($s->check());
@@ -43,15 +52,48 @@ class BankNoteSerialNumberTest extends PHPUnit_Framework_TestCase
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('U31843475132');
         $this->assertTrue($s->check());
     }
-    
-    
-    /**
-     * @expectedException RuntimeException
-     */
-    public function testNotImplementedYet()
+        
+    public function testChecki1stSeriesKO()
     {
-        // serial number valid, but not yet implemented, because i have not the rule to check that yet!
+        $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('u23762095871');
+        $this->assertFalse($s->check());
+        $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('x16557652919');
+        $this->assertFalse($s->check());
+        $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('u49808780024');
+        $this->assertFalse($s->check());
+        $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('u14790523136');
+        $this->assertFalse($s->check());
+        $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('u56461294373');
+        $this->assertFalse($s->check());
+        $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('u31843475132');
+        $this->assertFalse($s->check());
+    }
+
+
+    public function testChecki2ndSeriesOK()
+    {
+
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('ZB0513298374');
         $this->assertTrue($s->check());
+        
+        $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('VA0436214792');
+        $this->assertTrue($s->check());
+        
+        $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('UB1016471792');
+        $this->assertTrue($s->check());
+    }
+
+
+    public function testChecki2ndSeriesKO()
+    {
+
+        $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('zb0513298374');
+        $this->assertFalse($s->check());
+        
+        $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('va0436214792');
+        $this->assertFalse($s->check());
+        
+        $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('ub1016471792');
+        $this->assertFalse($s->check());
     }
 }

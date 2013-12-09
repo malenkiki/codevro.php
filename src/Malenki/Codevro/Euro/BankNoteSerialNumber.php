@@ -64,6 +64,20 @@ class BankNoteSerialNumber extends Code implements StandardSize
     protected $str_national_identification_name = null;
 
 
+    public function __construct($str)
+    {
+        if(is_string($str) && strlen(trim($str)))
+        {
+            $str = trim($str);
+            parent::__construct($str);
+        }
+        else
+        {
+            throw new \InvalidArgumentException('Euro Bank Note serial number must be a not null string.');
+        }
+    }
+
+
     public function getNationalIdentificationCode()
     {
         if(array_key_exists($this->str_value[0], self::$arr_checksum))
@@ -72,41 +86,66 @@ class BankNoteSerialNumber extends Code implements StandardSize
         }
         else
         {
-            throw new \Exception(_('The first letter is not allowed into serial number.'));
+            throw new \Exception('The first letter is not allowed into serial number.');
         }
     }
 
 
+
+    public function isSecondSeries()
+    {
+        return (boolean) preg_match('/A-Z/', $this->str_value{1});
+    }
+
+
+
+    /**
+     * @todo Use ISO code instead of english name 
+     * 
+     * @access public
+     * @return void
+     */
     public function getNationalIdentificationName()
     {
         if(is_null($this->str_national_identification_name))
         {
             $arr_checksum = array(
-                'Z' => _('Belgium'),
-                'Y' => _('Greece'),
-                'X' => _('Germany'),
-                'W' => _('Denmark'),
-                'V' => _('Spain'),
-                'U' => _('France'),
-                'T' => _('Ireland'),
-                'S' => _('Italy'),
-                'R' => _('Luxembourg'),
-                'P' => _('Netherlands'),
-                'N' => _('Austria'),
-                'M' => _('Portugal'),
-                'L' => _('Finland'),
-                'K' => _('Sweden'),
-                'J' => _('United Kingdom'),
-                'H' => _('Slovenia'),
-                'G' => _('Cyprus'),
-                'F' => _('Malta'),
-                'E' => _('Slovakia'),
-                'D' => _('Estonia')
+                'Z' => 'Belgium',
+                'Y' => 'Greece',
+                'X' => 'Germany',
+                'W' => 'Denmark',
+                'V' => 'Spain',
+                'U' => 'France',
+                'T' => 'Ireland',
+                'S' => 'Italy',
+                'R' => 'Luxembourg',
+                'P' => 'Netherlands',
+                'N' => 'Austria',
+                'M' => 'Portugal',
+                'L' => 'Finland',
+                'K' => 'Sweden',
+                'J' => 'United Kingdom',
+                'H' => 'Slovenia',
+                'G' => 'Cyprus',
+                'F' => 'Malta',
+                'E' => 'Slovakia',
+                'D' => 'Estonia'
             );
 
-            $this->str_national_identification_name = $arr_checksum[
-                $this->getNationalIdentificationCode()
-                ];
+            if($this->isSecondSeries())
+            {
+                $arr_checksum['W'] = 'Germany';
+                $arr_checksum['R'] = 'Germany';
+                unset($arr_checksum['L']);
+                unset($arr_checksum['K']);
+                $arr_checksum['H'] = 'United Kingdom';
+                unset($arr_checksum['G']);
+                unset($arr_checksum['F']);
+                $arr_checksum['E'] = 'France';
+                $arr_checksum['D'] = 'Poland';
+            }
+
+            $this->str_national_identification_name = $arr_checksum[$this->str_value[0]];
         }
 
         return $this->str_national_identification_name;
@@ -116,12 +155,12 @@ class BankNoteSerialNumber extends Code implements StandardSize
 
     public function check()
     {
+        $str = preg_replace('/[A-Z]/', '', $this->str_value);
+
         if(preg_match('/[A-Z]/', $this->str_value[1]))
         {
-            throw new \RuntimeException('New serial code is not yet implemented! :-(');
+            $str .= ord($this->str_value[1]);
         }
-
-        $str = preg_replace('/[A-Z]/', '', $this->str_value);
 
         $int = array_sum(str_split($str));
 
@@ -131,7 +170,12 @@ class BankNoteSerialNumber extends Code implements StandardSize
             $int = array_sum(str_split($str_int));
         }
 
-        return self::$arr_checksum[$this->getNationalIdentificationCode()] == $int;
+        if(!isset(self::$arr_checksum[$this->str_value[0]]))
+        {
+            return false;
+        }
+
+        return self::$arr_checksum[$this->str_value[0]] == $int;
     }
 
 
