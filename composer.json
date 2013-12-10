@@ -5,6 +5,9 @@
     "keywords": ["Luhn","NIR", "siret", "siren", "RIB", "VAT", "EIN", "SSN", "BIC", "EAN", "IBAN", "ISBN", "ISSN"],
     "homepage": "https://github.com/malenkiki/codevro.php",
     "license": "MIT",
+    "support": {
+        "issues": "https://github.com/malenkiki/codevro.php/issues"
+    },
     "authors": [
         {
             "name": "Michel Petit",
