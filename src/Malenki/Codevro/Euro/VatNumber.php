@@ -28,57 +28,66 @@ use Malenki\Codevro\Code;
 use Malenki\Codevro\StandardSize;
 
 
+/**
+ * European Vat Identification Number.
+ *
+ * @see http://en.wikipedia.org/wiki/VAT_identification_number 
+ * @see http://www.pruefziffernberechnung.de/U/USt-IdNr.shtml
+ * @see http://www.ebsoft.org/mambo/ressources/clefs.htm
+ * @author Michel Petit <petit.michel@gmail.com> 
+ * @license MIT
+ */
 class VatNumber extends Code
 {
     private function checkAt()
     {
-        return preg_match('/^ATU[0-9]{8}$/', $this->str_value);
+        return (boolean) preg_match('/^ATU[0-9]{8}$/', $this->str_value);
     }
 
     private function checkBe()
     {
-        return preg_match('/^BE[0-9]{9,10}$/', $this->str_value);
+        return (boolean) preg_match('/^BE[0-9]{9,10}$/', $this->str_value);
     }
 
     private function checkBg()
     {
-        return preg_match('/^BG[0-9]{9,10}$/', $this->str_value);
+        return (boolean) preg_match('/^BG[0-9]{9,10}$/', $this->str_value);
     }
 
     private function checkCy()
     {
-        return preg_match('/^CY[0-9]{8}[A-Z]{1}$/', $this->str_value);
+        return (boolean) preg_match('/^CY[0-9]{8}[A-Z]{1}$/', $this->str_value);
     }
 
     private function checkDk()
     {
-        return preg_match('/^DK[0-9]{8}$/', $this->str_value);
+        return (boolean) preg_match('/^DK[0-9]{8}$/', $this->str_value);
     }
 
     private function checkEe()
     {
-        return preg_match('/^EE[0-9]{9}$/', $this->str_value);
+        return (boolean) preg_match('/^EE[0-9]{9}$/', $this->str_value);
     }
 
     private function checkEs()
     {
-        return preg_match('/^ES[A-Z]{1}[0-9]{7}[A-Z]{1}$/', $this->str_value);
+        return (boolean) preg_match('/^ES[A-Z]{1}[0-9]{7}[A-Z]{1}$/', $this->str_value);
     }
 
     private function checkFi()
     {
-        return preg_match('/^FI[0-9]{8}$/', $this->str_value);
+        return (boolean) preg_match('/^FI[0-9]{8}$/', $this->str_value);
     }
 
     private function checkFr()
     {
-        return preg_match('/^FR[A-Z0-9]{2}[0-9]{9}$/', $this->str_value);
+        return (boolean) preg_match('/^FR[A-Z0-9]{2}[0-9]{9}$/', $this->str_value);
     }
 
 
     private function checkDe()
     {
-        return preg_match('/^DE[0-9]{9}$/', $this->str_value);
+        return (boolean) preg_match('/^DE[0-9]{9}$/', $this->str_value);
     }
 
 
@@ -90,11 +99,24 @@ class VatNumber extends Code
     {
         if(!preg_match('/^[A-Z]{2}/', $this->str_value))
         {
-            throw new Exception(_('Invalid country code.'));
+            throw new \Exception(_('Invalid country code.'));
         }
         else
         {
-            return true;
+            $str_country = ucfirst(strtolower(substr($this->str_value, 0, 2)));
+
+            $str_method = 'check' . $str_country;
+
+            if(method_exists($this, $str_method))
+            {
+                return $this->$str_method();
+            }
+            else
+            {
+                trigger_error('This method is not implemented yet', E_USER_WARNING);
+            }
+
+            return false;
         }
     }
 }

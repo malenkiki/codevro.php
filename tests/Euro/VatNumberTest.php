@@ -28,9 +28,26 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 class VatNumberTest extends PHPUnit_Framework_TestCase
 {
 
-    public function testOK()
+    public function testFrOK()
     {
-        $v = new Malenki\Codevro\Euro\VatNumber('FR16482769163');
-        $this->assertTrue($v->check());
+        $f = new Malenki\Codevro\Euro\VatNumber('FR83404833048');
+        $this->assertTrue($f->check());
+        $f = new Malenki\Codevro\Euro\VatNumber('FR16482769163');
+        $this->assertTrue($f->check());
+
+    }
+    
+    public function testGbOK()
+    {
+        //$v = new Malenki\Codevro\Euro\VatNumber('GB57BARC20740962840799');
+        //$this->assertTrue($v->check());
+        $this->markTestIncomplete('This test has not been implemented yet.');
+    }
+        
+    public function testNlOK()
+    {
+        //$v = new Malenki\Codevro\Euro\VatNumber('NL86ABNA0489143725');
+        //$this->assertTrue($v->check());
+        $this->markTestIncomplete('This test has not been implemented yet.');
     }
 }
