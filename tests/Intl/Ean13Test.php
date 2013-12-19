@@ -23,7 +23,6 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 
-(@include_once __DIR__ . '/../../vendor/autoload.php') || @include_once __DIR__ . '/../../../../autoload.php';
 
 class Ean13Test extends PHPUnit_Framework_TestCase
 {
