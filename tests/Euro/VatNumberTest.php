@@ -27,13 +27,21 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 class VatNumberTest extends PHPUnit_Framework_TestCase
 {
 
-    public function testFrOK()
+    public function testFrenchVatIdentificationNumberWellFormedHasChecked()
     {
         $f = new Malenki\Codevro\Euro\VatNumber('FR83404833048');
         $this->assertTrue($f->check());
         $f = new Malenki\Codevro\Euro\VatNumber('FR16482769163');
         $this->assertTrue($f->check());
 
+    }
+    
+    public function testFrenchVatIdentificationNumberFormatedHasChecked()
+    {
+        $f = new Malenki\Codevro\Euro\VatNumber('FR83 404 833 048');
+        $this->assertTrue($f->check());
+        $f = new Malenki\Codevro\Euro\VatNumber('FR16-482-769-163');
+        $this->assertTrue($f->check());
     }
     
     public function testGbOK()
