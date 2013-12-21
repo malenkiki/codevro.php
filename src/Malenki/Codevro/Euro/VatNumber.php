@@ -39,6 +39,19 @@ use Malenki\Codevro\StandardSize;
  */
 class VatNumber extends Code
 {
+    public function __construct($str)
+    {
+        if(is_string($str) && strlen(trim($str)))
+        {
+            $str = preg_replace('/[^A-Z0-9]/', '', trim($str));
+            parent::__construct($str);
+        }
+        else
+        {
+            throw new \InvalidArgumentException('European VAT Identification Number must be a not null string.');
+        }
+    }
+
     private function checkAt()
     {
         return (boolean) preg_match('/^ATU[0-9]{8}$/', $this->str_value);
@@ -81,6 +94,21 @@ class VatNumber extends Code
 
     private function checkFr()
     {
+        if(extension_loaded('bcmath'))
+        {
+            if(preg_match('/^FR[0-9]{2}/', $this->str_value))
+            {
+                $str_siren = substr($this->str_value, 4, 9); 
+                $str_key = substr($this->str_value, 2, 2);
+
+                return $str_key == bcmod(bcmod($str_siren, 97) * 3 + 12, 97);
+            }
+        }
+        else
+        {
+            trigger_error('You have not BCMath PHP extension installed, it is strongly recommanded to have it for checking Franch VAT  with check digit.', E_USER_WARNING);
+        }
+        
         return (boolean) preg_match('/^FR[A-Z0-9]{2}[0-9]{9}$/', $this->str_value);
     }
 
