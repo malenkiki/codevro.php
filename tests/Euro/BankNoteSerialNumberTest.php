@@ -91,6 +91,9 @@ class BankNoteSerialNumberTest extends PHPUnit_Framework_TestCase
         
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('UE7053249824');
         $this->assertTrue($s->check());
+        
+        $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('NA3802962421');
+        $this->assertTrue($s->check());
     }
 
 
