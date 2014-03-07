@@ -94,6 +94,8 @@ class Isan extends Code implements Formatable, StandardSize
             $str = 'get' . ucfirst($name);
             return $this->$str();
         }
+
+        return parent::__get($name);
     }
 
 
