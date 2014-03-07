@@ -57,6 +57,22 @@ abstract class Code
     protected $int_length = 0;
 
 
+
+    public function __get($name)
+    {
+        if(in_array($name, array('value', 'length')))
+        {
+            if($name == 'value')
+            {
+                return $this->str_value;
+            }
+
+            return $this->int_length;
+        }
+    }
+
+
+
     /**
      * Constructor sets code's value and compute internally its length. 
      * 

@@ -28,6 +28,28 @@ class CreditCardNumber
 extends \Malenki\Codevro\Luhn
 implements \Malenki\Codevro\Formatable
 {
+    public function __get($name)
+    {
+        if(in_array($name, array('iin', 'mii', 'mii_description')))
+        {
+            if($name == 'iin')
+            {
+                return $this->getIin();
+            }
+            elseif($name == 'mii')
+            {
+                return $this->getMii();
+            }
+            else
+            {
+                return $this->getMiiDescription();
+            }
+        }
+
+        return parent::__get($name);
+    }
+
+
     /**
      * Gets Issuer identification number (IIN)
      * 
