@@ -24,8 +24,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 namespace Malenki\Codevro\Intl;
 use \Malenki\Codevro\Code;
 use \Malenki\Codevro\Formatable;
+use \Malenki\Codevro\StandardSize;
 
-class Isan extends Code implements Formatable
+class Isan extends Code implements Formatable, StandardSize
 {
     public static function computeCheckDigit($str)
     {
@@ -86,6 +87,33 @@ class Isan extends Code implements Formatable
 
 
 
+
+    public function getRoot()
+    {
+        return substr($this->str_value, 0, 12);
+    }
+
+
+    public function getEpisode()
+    {
+        return substr($this->str_value, 12, 4);
+    }
+
+
+    public function format()
+    {
+        return sprintf(
+            'ISAN %s',
+            strtoupper(
+                implode(
+                    '-',
+                    str_split($this->str_value, 4)
+                )
+            )
+        );
+    }
+
+
     public function check()
     {
         return (array_pop(str_split($this->str_value)) == self::computeCheckDigit($this->str_value)) && $this->checkSize();
@@ -96,5 +124,11 @@ class Isan extends Code implements Formatable
     public function checkSize()
     {
         return $this->getLength() == 17;
+    }
+
+
+    public function __toString()
+    {
+        return $this->format();
     }
 }
