@@ -87,6 +87,15 @@ class Isan extends Code implements Formatable, StandardSize
 
 
 
+    public function __get($name)
+    {
+        if(in_array($name, array('root', 'episode')))
+        {
+            $str = 'get' . ucfirst($name);
+            return $this->$str();
+        }
+    }
+
 
     public function getRoot()
     {

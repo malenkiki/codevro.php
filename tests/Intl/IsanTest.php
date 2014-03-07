@@ -66,24 +66,32 @@ class IsanTest extends PHPUnit_Framework_TestCase
     {
         $s = new Malenki\Codevro\Intl\Isan('00000002B3C800003');
         $this->assertEquals('0000', $s->getEpisode());
+        $this->assertEquals('0000', $s->episode);
         $s = new Malenki\Codevro\Intl\Isan('00000000DDB00069Q');
         $this->assertEquals('0069', $s->getEpisode());
+        $this->assertEquals('0069', $s->episode);
         $s = new Malenki\Codevro\Intl\Isan('00000000DDB0006AO');
         $this->assertEquals('006A', $s->getEpisode());
+        $this->assertEquals('006A', $s->episode);
         $s = new Malenki\Codevro\Intl\Isan('00000000DDB0006BM');
         $this->assertEquals('006B', $s->getEpisode());
+        $this->assertEquals('006B', $s->episode);
     }
     
     public function testGettingRootPartSouldBeRightPart()
     {
         $s = new Malenki\Codevro\Intl\Isan('00000002B3C800003');
         $this->assertEquals('00000002B3C8', $s->getRoot());
+        $this->assertEquals('00000002B3C8', $s->root);
         $s = new Malenki\Codevro\Intl\Isan('00000000DDB00069Q');
         $this->assertEquals('00000000DDB0', $s->getRoot());
+        $this->assertEquals('00000000DDB0', $s->root);
         $s = new Malenki\Codevro\Intl\Isan('00000000DDB0006AO');
         $this->assertEquals('00000000DDB0', $s->getRoot());
+        $this->assertEquals('00000000DDB0', $s->root);
         $s = new Malenki\Codevro\Intl\Isan('00000000DDB0006BM');
         $this->assertEquals('00000000DDB0', $s->getRoot());
+        $this->assertEquals('00000000DDB0', $s->root);
     }
 
 
@@ -91,11 +99,15 @@ class IsanTest extends PHPUnit_Framework_TestCase
     {
         $s = new Malenki\Codevro\Intl\Isan('00000002B3C800003');
         $this->assertEquals('ISAN 0000-0002-B3C8-0000-3', $s->format());
+        $this->assertEquals('ISAN 0000-0002-B3C8-0000-3', "$s");
         $s = new Malenki\Codevro\Intl\Isan('00000000DDB00069Q');
         $this->assertEquals('ISAN 0000-0000-DDB0-0069-Q', $s->format());
+        $this->assertEquals('ISAN 0000-0000-DDB0-0069-Q', "$s");
         $s = new Malenki\Codevro\Intl\Isan('00000000DDB0006AO');
         $this->assertEquals('ISAN 0000-0000-DDB0-006A-O', $s->format());
+        $this->assertEquals('ISAN 0000-0000-DDB0-006A-O', "$s");
         $s = new Malenki\Codevro\Intl\Isan('00000000DDB0006BM');
         $this->assertEquals('ISAN 0000-0000-DDB0-006B-M', $s->format());
+        $this->assertEquals('ISAN 0000-0000-DDB0-006B-M', "$s");
     }
 }
