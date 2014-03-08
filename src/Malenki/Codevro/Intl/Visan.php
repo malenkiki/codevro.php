@@ -32,6 +32,8 @@ class Visan extends Isan
         {
             return $this->getVersion();
         }
+
+        return parent::__get($name);
     }
 
 

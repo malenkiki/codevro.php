@@ -89,7 +89,7 @@ class Isan extends Code implements Formatable, StandardSize
 
     public function __get($name)
     {
-        if(in_array($name, array('root', 'episode')))
+        if(in_array($name, array('root', 'episode', 'urn')))
         {
             $str = 'get' . ucfirst($name);
             return $this->$str();
@@ -108,6 +108,12 @@ class Isan extends Code implements Formatable, StandardSize
     public function getEpisode()
     {
         return substr($this->str_value, 12, 4);
+    }
+
+
+    public function getUrn()
+    {
+        return preg_replace('/^ISAN\s+/', 'URN:ISAN:', $this->format());
     }
 
 
