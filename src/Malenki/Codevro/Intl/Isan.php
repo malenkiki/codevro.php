@@ -38,7 +38,7 @@ class Isan extends Code implements Formatable, StandardSize
         $int_mod_one = 37;
         $int_mod_two = $int_mod_one - 1;
 
-        $arr = str_split(strtolower(substr($str, 0, 16)));
+        $arr = str_split(strtolower(substr($str, 0, strlen($str) - 1)));
 
         foreach($arr as $i => $c)
         {
@@ -48,7 +48,7 @@ class Isan extends Code implements Formatable, StandardSize
             
             $int_as = $int_s;
 
-            if($int_s > $int_mod_two)
+            if($int_s >= $int_mod_two)
             {
                 $int_as -= $int_mod_two;
             }

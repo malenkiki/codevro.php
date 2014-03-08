@@ -24,8 +24,46 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 namespace Malenki\Codevro\Intl;
 
 
-class Visan
-extends \Malenki\Codevro\Isan
+class Visan extends Isan
 {
+    public function getVersion()
+    {
+        return substr($this->str_value, 17, 8);
+    }
+
+    public function format()
+    {
+        return sprintf(
+            '%s-%s',
+            new Isan(substr($this->str_value, 0, 17)),
+            strtoupper(
+                implode(
+                    '-',
+                    str_split(substr($this->str_value, 17), 4)
+                )
+            )
+        );
+    }
+
+    public function check()
+    {
+        $isan = new Isan(substr($this->str_value, 0, 17));
+        $first_checking = $isan->check();
+
+        $arr = str_split($this->str_value);
+        unset($arr[16]);
+        $arr = array_values($arr);
+        $str_last = end($arr);
+
+        $str = implode('', $arr);
+
+        return $first_checking && self::computeCheckDigit($str) == $str_last;
+    }
+
+
+    public function __toString()
+    {
+        return $this->format();
+    }
 }
 
