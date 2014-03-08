@@ -30,6 +30,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * Stargate Atlantis - Season 1 - Disc 3: 0000-0000-DDB0-006A-O-0000-0000-2
  * Stargate Atlantis - Season 1 - Disc 4: 0000-0000-DDB0-006B-M-0000-0000-8
  * Example taken from Wikipedia article about ISAN: 0000-0001-8947-0000-8-0000-0000-D
+ * The Reichenbach Fall (Sherlock): 0000-0003-7766-0006-P-0000-0000-0
+ * Star wars (1977): 0000-0000-EB93-0000-Q-0000-0000-X
  */
 class VisanTest extends PHPUnit_Framework_TestCase
 {
@@ -40,6 +42,8 @@ class VisanTest extends PHPUnit_Framework_TestCase
         $s = new Malenki\Codevro\Intl\Visan('00000000DDB00069Q00000000X');
         $s = new Malenki\Codevro\Intl\Visan('00000000DDB0006AO000000002');
         $s = new Malenki\Codevro\Intl\Visan('00000000DDB0006BM000000008');
+        $s = new Malenki\Codevro\Intl\Visan('0000000377660006P000000000');
+        $s = new Malenki\Codevro\Intl\Visan('00000000EB930000Q00000000X');
     }
 
 
@@ -55,6 +59,10 @@ class VisanTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($s->check());
         $s = new Malenki\Codevro\Intl\Visan('0000000189470000800000000D');
         $this->assertTrue($s->check());
+        $s = new Malenki\Codevro\Intl\Visan('0000000377660006P000000000');
+        $this->assertTrue($s->check());
+        $s = new Malenki\Codevro\Intl\Visan('00000000EB930000Q00000000X');
+        $this->assertTrue($s->check());
     }
     
     
@@ -69,6 +77,10 @@ class VisanTest extends PHPUnit_Framework_TestCase
         $s = new Malenki\Codevro\Intl\Visan('00000000DDB0006BN000000008');
         $this->assertFalse($s->check());
         $s = new Malenki\Codevro\Intl\Visan('0000000189470000500000000D');
+        $this->assertFalse($s->check());
+        $s = new Malenki\Codevro\Intl\Visan('0000000377660006P000000001');
+        $this->assertFalse($s->check());
+        $s = new Malenki\Codevro\Intl\Visan('00000000AB930000Q00000000X');
         $this->assertFalse($s->check());
     }
 
@@ -110,6 +122,12 @@ class VisanTest extends PHPUnit_Framework_TestCase
         $s = new Malenki\Codevro\Intl\Visan('0000000189470000800000000D');
         $this->assertEquals('ISAN 0000-0001-8947-0000-8-0000-0000-D', $s->format());
         $this->assertEquals('ISAN 0000-0001-8947-0000-8-0000-0000-D', "$s");
+        $s = new Malenki\Codevro\Intl\Visan('0000000377660006P000000000');
+        $this->assertEquals('ISAN 0000-0003-7766-0006-P-0000-0000-0', $s->format());
+        $this->assertEquals('ISAN 0000-0003-7766-0006-P-0000-0000-0', "$s");
+        $s = new Malenki\Codevro\Intl\Visan('00000000EB930000Q00000000X');
+        $this->assertEquals('ISAN 0000-0000-EB93-0000-Q-0000-0000-X', $s->format());
+        $this->assertEquals('ISAN 0000-0000-EB93-0000-Q-0000-0000-X', "$s");
     }
 
     public function testFormatedVisanAsUrnShouldBeWellFormated()
