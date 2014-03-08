@@ -26,6 +26,15 @@ namespace Malenki\Codevro\Intl;
 
 class Visan extends Isan
 {
+    public function __get($name)
+    {
+        if($name == 'version')
+        {
+            return $this->getVersion();
+        }
+    }
+
+
     public function getVersion()
     {
         return substr($this->str_value, 17, 8);

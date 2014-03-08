@@ -72,12 +72,16 @@ class VisanTest extends PHPUnit_Framework_TestCase
     {
         $s = new Malenki\Codevro\Intl\Visan('00000002B3C80000300000000S');
         $this->assertEquals('00000000', $s->getVersion());
+        $this->assertEquals('00000000', $s->version);
         $s = new Malenki\Codevro\Intl\Visan('00000000DDB00069Q00000000X');
         $this->assertEquals('00000000', $s->getVersion());
+        $this->assertEquals('00000000', $s->version);
         $s = new Malenki\Codevro\Intl\Visan('00000000DDB0006AO000000002');
         $this->assertEquals('00000000', $s->getVersion());
+        $this->assertEquals('00000000', $s->version);
         $s = new Malenki\Codevro\Intl\Visan('00000000DDB0006BM000000008');
         $this->assertEquals('00000000', $s->getVersion());
+        $this->assertEquals('00000000', $s->version);
     }
     
 
