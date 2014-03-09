@@ -60,4 +60,29 @@ class Ean13Test extends PHPUnit_Framework_TestCase
         $s = new Malenki\Codevro\Intl\Ean13('3-02012-002210-9');
         $this->assertTrue($s->check());
     }
+
+
+    public function testCheckWhetherEanIsIsmn()
+    {
+        $s = new Malenki\Codevro\Intl\Ean13('979-0-2600-0043-8');
+        $this->assertTrue($s->isIsmn());
+    }
+
+    public function testCheckWhetherEanIsIssn()
+    {
+        $s = new Malenki\Codevro\Intl\Ean13('977-2049-3630-02');
+        $this->assertTrue($s->isIssn());
+        
+        $s = new Malenki\Codevro\Intl\Ean13('977-2434-5610-06');
+        $this->assertTrue($s->isIssn());
+    }
+    
+    public function testCheckWhetherEanIsIsbn()
+    {
+        $s = new Malenki\Codevro\Intl\Ean13('978-2-91-4855-89-1');
+        $this->assertTrue($s->isIsbn());
+        
+        $s = new Malenki\Codevro\Intl\Ean13('9782020246422');
+        $this->assertTrue($s->isIsbn());
+    }
 }

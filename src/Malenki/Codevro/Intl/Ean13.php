@@ -62,4 +62,9 @@ class Ean13 extends Ean implements StandardSize
     {
         return $this->getPrefix() == '977';
     }
+
+    public function isIsmn()
+    {
+        return $this->getPrefix() == '979' && $this->str_value[3] == '0';
+    }
 }
