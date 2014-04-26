@@ -118,7 +118,8 @@ class Isan extends Code implements Formatable, StandardSize
 
     public function check()
     {
-        return (array_pop(str_split($this->str_value)) == self::computeCheckDigit($this->str_value)) && $this->checkSize();
+        $last = str_split($this->str_value);
+        return (array_pop($last) == self::computeCheckDigit($this->str_value)) && $this->checkSize();
     }
 
     public function checkSize()
