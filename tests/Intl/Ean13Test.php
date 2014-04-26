@@ -22,8 +22,6 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
-
 class Ean13Test extends PHPUnit_Framework_TestCase
 {
 
@@ -31,36 +29,34 @@ class Ean13Test extends PHPUnit_Framework_TestCase
     {
         $s = new Malenki\Codevro\Intl\Ean13('9782359220223');
         $this->assertTrue($s->isIsbn());
-        
+
         $s = new Malenki\Codevro\Intl\Ean13('978-2359220223');
         $this->assertTrue($s->isIsbn());
     }
-    
+
     public function testIsbnKO()
     {
         $s = new Malenki\Codevro\Intl\Ean13('3020120022109');
         $this->assertFalse($s->isIsbn());
-        
+
         $s = new Malenki\Codevro\Intl\Ean13('3-02012-002210-9');
         $this->assertFalse($s->isIsbn());
     }
-
 
     public function testCheckOK()
     {
         $s = new Malenki\Codevro\Intl\Ean13('9782359220223');
         $this->assertTrue($s->check());
-        
+
         $s = new Malenki\Codevro\Intl\Ean13('978-2359220223');
         $this->assertTrue($s->check());
-        
+
         $s = new Malenki\Codevro\Intl\Ean13('3020120022109');
         $this->assertTrue($s->check());
-        
+
         $s = new Malenki\Codevro\Intl\Ean13('3-02012-002210-9');
         $this->assertTrue($s->check());
     }
-
 
     public function testCheckWhetherEanIsIsmn()
     {
@@ -72,16 +68,16 @@ class Ean13Test extends PHPUnit_Framework_TestCase
     {
         $s = new Malenki\Codevro\Intl\Ean13('977-2049-3630-02');
         $this->assertTrue($s->isIssn());
-        
+
         $s = new Malenki\Codevro\Intl\Ean13('977-2434-5610-06');
         $this->assertTrue($s->isIssn());
     }
-    
+
     public function testCheckWhetherEanIsIsbn()
     {
         $s = new Malenki\Codevro\Intl\Ean13('978-2-91-4855-89-1');
         $this->assertTrue($s->isIsbn());
-        
+
         $s = new Malenki\Codevro\Intl\Ean13('9782020246422');
         $this->assertTrue($s->isIsbn());
     }

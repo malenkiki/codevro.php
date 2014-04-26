@@ -39,7 +39,7 @@ use Malenki\Codevro\StandardSize;
 class BankNoteSerialNumber extends Code implements StandardSize
 {
     protected static $arr_checksum = array(
-        'Z' => 9, 
+        'Z' => 9,
         'Y' => 1,
         'X' => 2,
         'W' => 3,
@@ -60,55 +60,42 @@ class BankNoteSerialNumber extends Code implements StandardSize
         'E' => 3,
         'D' => 4
     );
-        
-    protected $str_national_identification_name = null;
 
+    protected $str_national_identification_name = null;
 
     public function __construct($str)
     {
-        if(is_string($str) && strlen(trim($str)))
-        {
+        if (is_string($str) && strlen(trim($str))) {
             $str = trim($str);
             parent::__construct($str);
-        }
-        else
-        {
+        } else {
             throw new \InvalidArgumentException('Euro Bank Note serial number must be a not null string.');
         }
     }
 
-
     public function getNationalIdentificationCode()
     {
-        if(array_key_exists($this->str_value[0], self::$arr_checksum))
-        {
+        if (array_key_exists($this->str_value[0], self::$arr_checksum)) {
             return $this->str_value[0];
-        }
-        else
-        {
+        } else {
             throw new \Exception('The first letter is not allowed into serial number.');
         }
     }
-
-
 
     public function isSecondSeries()
     {
         return (boolean) preg_match('/A-Z/', $this->str_value{1});
     }
 
-
-
     /**
-     * @todo Use ISO code instead of english name 
-     * 
+     * @todo Use ISO code instead of english name
+     *
      * @access public
      * @return void
      */
     public function getNationalIdentificationName()
     {
-        if(is_null($this->str_national_identification_name))
-        {
+        if (is_null($this->str_national_identification_name)) {
             $arr_checksum = array(
                 'Z' => 'Belgium',
                 'Y' => 'Greece',
@@ -132,8 +119,7 @@ class BankNoteSerialNumber extends Code implements StandardSize
                 'D' => 'Estonia'
             );
 
-            if($this->isSecondSeries())
-            {
+            if ($this->isSecondSeries()) {
                 $arr_checksum['W'] = 'Germany';
                 $arr_checksum['R'] = 'Germany';
                 unset($arr_checksum['L']);
@@ -151,38 +137,30 @@ class BankNoteSerialNumber extends Code implements StandardSize
         return $this->str_national_identification_name;
     }
 
-
-
     public function check()
     {
         $str = preg_replace('/[A-Z]/', '', $this->str_value);
 
-        if(preg_match('/[A-Z]/', $this->str_value[1]))
-        {
+        if (preg_match('/[A-Z]/', $this->str_value[1])) {
             $str .= ord($this->str_value[1]);
         }
 
         $int = array_sum(str_split($str));
 
-        while($int > 9)
-        {
+        while ($int > 9) {
             $str_int = (string) $int;
             $int = array_sum(str_split($str_int));
         }
 
-        if(!isset(self::$arr_checksum[$this->str_value[0]]))
-        {
+        if (!isset(self::$arr_checksum[$this->str_value[0]])) {
             return false;
         }
 
         return self::$arr_checksum[$this->str_value[0]] == $int;
     }
 
-
-
     public function checkSize()
     {
         return $this->getLength() == 12;
     }
 }
-

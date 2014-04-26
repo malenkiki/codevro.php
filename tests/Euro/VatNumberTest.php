@@ -22,8 +22,6 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
-
 class VatNumberTest extends PHPUnit_Framework_TestCase
 {
 
@@ -35,7 +33,7 @@ class VatNumberTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($f->check());
 
     }
-    
+
     public function testFrenchVatIdentificationNumberFormatedHasChecked()
     {
         $f = new Malenki\Codevro\Euro\VatNumber('FR83 404 833 048');
@@ -43,14 +41,14 @@ class VatNumberTest extends PHPUnit_Framework_TestCase
         $f = new Malenki\Codevro\Euro\VatNumber('FR16-482-769-163');
         $this->assertTrue($f->check());
     }
-    
+
     public function testGbOK()
     {
         //$v = new Malenki\Codevro\Euro\VatNumber('GB57BARC20740962840799');
         //$this->assertTrue($v->check());
         $this->markTestIncomplete('This test has not been implemented yet.');
     }
-        
+
     public function testNlOK()
     {
         //$v = new Malenki\Codevro\Euro\VatNumber('NL86ABNA0489143725');

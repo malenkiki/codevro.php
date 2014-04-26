@@ -27,4 +27,3 @@ interface Range
 {
     public function checkRange();
 }
-

@@ -24,67 +24,58 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Malenki\Codevro;
 
-use Exception;
-
 /**
  * Luhn algorithm definition.
  *
- * Luhn algorithm is used into many code checking. This is the base algorithm. 
- * 
+ * Luhn algorithm is used into many code checking. This is the base algorithm.
+ *
  * @see http://en.wikipedia.org/wiki/Luhn_algorithm
  * @uses Code
- * @author Michel Petit <petit.michel@gmail.com> 
+ * @author Michel Petit <petit.michel@gmail.com>
  * @license MIT
  */
 class Luhn extends Code
 {
-	public function modulo10()
-	{
+    public function modulo10()
+    {
         $arr_out = array();
         $str_code = strrev($this->str_value);
-	    
-	    for($i = 0; $i < $this->int_length; $i++)
-	    {
-	    	$int_digit = (integer) $str_code[$i];
-	    
+
+        for ($i = 0; $i < $this->int_length; $i++) {
+            $int_digit = (integer) $str_code[$i];
+
             // Rang pair
-		    if(($i + 1) % 2 == 0)
-            {
-			    $int_digit = $int_digit * 2;
-			    
+            if (($i + 1) % 2 == 0) {
+                $int_digit = $int_digit * 2;
+
                 $arr_out[] = ($int_digit > 9) ? $int_digit - 9 : $int_digit;
-		    }
+            }
             // Rang impair
-		    else
-		    {
-		    	$arr_out[] = $int_digit;
-		    }
-	    }
-	    
-	    return array_sum($arr_out) % 10;
+            else {
+                $arr_out[] = $int_digit;
+            }
+        }
+
+        return array_sum($arr_out) % 10;
     }
-
-
 
     /**
      * Check whether the code follows Luhn algorithm or not.
-     * 
+     *
      * @access public
      * @return boolean
      */
     public function check()
     {
-	    return ! (boolean) $this->modulo10();
+        return ! (boolean) $this->modulo10();
     }
-
-
 
     /**
      * Computes the check digit for the given string.
-     * 
+     *
      * This creates a check digit for a string.
      *
-     * @param string $str 
+     * @param  string  $str
      * @static
      * @access public
      * @return integer
@@ -95,11 +86,10 @@ class Luhn extends Code
 
         $int_mod = $n->modulo10();
 
-        if($int_mod > 0)
-        {
+        if ($int_mod > 0) {
             return 10 - $int_mod;
         }
-        
+
         return $int_mod;
     }
 }

@@ -23,25 +23,18 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace Malenki\Codevro\Intl;
 
-
 class CreditCardNumber
 extends \Malenki\Codevro\Luhn
 implements \Malenki\Codevro\Formatable
 {
     public function __get($name)
     {
-        if(in_array($name, array('iin', 'mii', 'mii_description')))
-        {
-            if($name == 'iin')
-            {
+        if (in_array($name, array('iin', 'mii', 'mii_description'))) {
+            if ($name == 'iin') {
                 return $this->getIin();
-            }
-            elseif($name == 'mii')
-            {
+            } elseif ($name == 'mii') {
                 return $this->getMii();
-            }
-            else
-            {
+            } else {
                 return $this->getMiiDescription();
             }
         }
@@ -49,10 +42,9 @@ implements \Malenki\Codevro\Formatable
         return parent::__get($name);
     }
 
-
     /**
      * Gets Issuer identification number (IIN)
-     * 
+     *
      * @see http://en.wikipedia.org/wiki/Credit_card_number
      * @access public
      * @return string
@@ -62,10 +54,9 @@ implements \Malenki\Codevro\Formatable
         return substr($this->getValue(), 0, 6);
     }
 
-
     /**
-     * Gets Major Industry Identifier (MII) 
-     * 
+     * Gets Major Industry Identifier (MII)
+     *
      * @see http://en.wikipedia.org/wiki/Credit_card_number
      * @access public
      * @return integer
@@ -75,11 +66,9 @@ implements \Malenki\Codevro\Formatable
         return (integer) substr($this->getValue(), 0, 1);
     }
 
-
-
     /**
      * Gets description of the Major Industry Identifier
-     * 
+     *
      * @access public
      * @return string
      */
@@ -102,8 +91,8 @@ implements \Malenki\Codevro\Formatable
     }
 
     /**
-     * Formats credit card number by grouping digits by 4 
-     * 
+     * Formats credit card number by grouping digits by 4
+     *
      * @access public
      * @return string
      */

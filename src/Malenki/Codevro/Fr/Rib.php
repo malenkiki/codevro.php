@@ -33,10 +33,8 @@ implements \Malenki\Codevro\StandardSize, \Malenki\Codevro\Formatable
         $str_account = '';
         $arr_account = str_split($this->getNumeroDeCompte());
 
-        foreach($arr_account as $str_c)
-        {
-            if(!is_numeric($str_c))
-            {
+        foreach ($arr_account as $str_c) {
+            if (!is_numeric($str_c)) {
                 $int_c_prov = ord($str_c) - 64;
 
                 $int_c = (($int_c_prov + pow(2, ($int_c_prov - 10) / 9 )) % 10);
@@ -56,14 +54,10 @@ implements \Malenki\Codevro\StandardSize, \Malenki\Codevro\Formatable
         return bcmod($str_rib, 97) == 0;
     }
 
-
-
     public function checkSize()
     {
         return $this->getLength() == 23;
     }
-
-
 
     public function format()
     {
@@ -76,28 +70,20 @@ implements \Malenki\Codevro\StandardSize, \Malenki\Codevro\Formatable
         );
     }
 
-
-
     public function getCodeBanque()
     {
         return substr($this->str_value,0 , 5);
     }
-
-
 
     public function getCodeGuichet()
     {
         return substr($this->str_value, 5, 5);
     }
 
-
-
     public function getNumeroDeCompte()
     {
         return substr($this->str_value, 10, 11);
     }
-
-
 
     public function getCleRib()
     {

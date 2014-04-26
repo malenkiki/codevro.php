@@ -23,19 +23,16 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 namespace Malenki\Codevro\Intl;
 
-
 class Visan extends Isan
 {
     public function __get($name)
     {
-        if($name == 'version')
-        {
+        if ($name == 'version') {
             return $this->getVersion();
         }
 
         return parent::__get($name);
     }
-
 
     public function getVersion()
     {
@@ -71,10 +68,8 @@ class Visan extends Isan
         return $first_checking && self::computeCheckDigit($str) == $str_last;
     }
 
-
     public function __toString()
     {
         return $this->format();
     }
 }
-

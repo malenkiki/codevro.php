@@ -22,8 +22,6 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
-
 class SirenTest extends PHPUnit_Framework_TestCase
 {
 
@@ -33,27 +31,23 @@ class SirenTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($s->check());
         $s = new Malenki\Codevro\Fr\Siren('732829320');
         $this->assertTrue($s->check());
-        
+
         $s = new Malenki\Codevro\Fr\Siren('493 597 579');
         $this->assertTrue($s->check());
         $s = new Malenki\Codevro\Fr\Siren('732 829 320');
         $this->assertTrue($s->check());
     }
-    
-    
-    
+
     public function testCheckKO()
     {
         $s = new Malenki\Codevro\Fr\Siren('493597578');
         $this->assertFalse($s->check());
         $s = new Malenki\Codevro\Fr\Siren('732829321');
         $this->assertFalse($s->check());
-        
+
         $s = new Malenki\Codevro\Fr\Siren('493 597 578');
         $this->assertFalse($s->check());
         $s = new Malenki\Codevro\Fr\Siren('732 829 321');
         $this->assertFalse($s->check());
     }
 }
-
-

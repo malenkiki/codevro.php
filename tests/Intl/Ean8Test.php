@@ -22,8 +22,6 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
-
 class Ean8Test extends PHPUnit_Framework_TestCase
 {
 
@@ -34,11 +32,10 @@ class Ean8Test extends PHPUnit_Framework_TestCase
         $e8 = new Malenki\Codevro\Intl\Ean8('4207 0191');
         $this->assertTrue($e8->check());
     }
-    
+
     public function testFormat()
     {
         $e8 = new Malenki\Codevro\Intl\Ean8('42070191');
         $this->assertEquals('4207-0191', $e8->format());
     }
 }
-

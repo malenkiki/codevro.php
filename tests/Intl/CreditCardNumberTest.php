@@ -22,13 +22,11 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
-
 /**
- * CreditCardNumberTest 
- * 
+ * CreditCardNumberTest
+ *
  * @see http://www.paypalobjects.com/en_US/vhelp/paypalmanager_help/credit_card_numbers.htm
- * @author Michel Petit <petit.michel@gmail.com> 
+ * @author Michel Petit <petit.michel@gmail.com>
  * @license MIT
  */
 class CreditCardNumberTest extends PHPUnit_Framework_TestCase
@@ -36,7 +34,7 @@ class CreditCardNumberTest extends PHPUnit_Framework_TestCase
 
     /**
      * Tests Issuer Identification Number extracted from credit card number
-     * 
+     *
      * @access public
      * @return void
      */
@@ -45,14 +43,12 @@ class CreditCardNumberTest extends PHPUnit_Framework_TestCase
         $c = new Malenki\Codevro\Intl\CreditCardNumber('378282246310005');
         $this->assertEquals('378282', $c->getIin());
     }
-    
+
     public function testMii()
     {
         $c = new Malenki\Codevro\Intl\CreditCardNumber('378282246310005');
         $this->assertEquals('3', $c->getMii());
     }
-
-
 
     public function testCheckOK()
     {
@@ -90,4 +86,3 @@ class CreditCardNumberTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($c->check());
     }
 }
-

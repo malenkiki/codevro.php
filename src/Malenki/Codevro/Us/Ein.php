@@ -22,7 +22,6 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
 namespace Malenki\Codevro\Us;
 use Malenki\Codevro\Code;
 use \Exception;
@@ -42,15 +41,11 @@ class Ein extends Code implements \Malenki\Codevro\StandardSize, \Malenki\Codevr
         '90','91','92','93','94','95','98','99'
     );
 
-
     public function check()
     {
-        if(!in_array($this->str_value, self::$arr_valid_prefixes))
-        {
+        if (!in_array($this->str_value, self::$arr_valid_prefixes)) {
             throw new Exception(_('EIN has invalid prefix.'));
-        }
-        else
-        {
+        } else {
             return true;
         }
     }
@@ -60,13 +55,11 @@ class Ein extends Code implements \Malenki\Codevro\StandardSize, \Malenki\Codevr
         return $this->getLength() == 9;
     }
 
-
-
     public function format()
     {
         return sprintf(
-            '%02d-%07d', 
-            substr($this->str_value, 0, 2), 
+            '%02d-%07d',
+            substr($this->str_value, 0, 2),
             substr($this->str_value, 2)
         );
     }

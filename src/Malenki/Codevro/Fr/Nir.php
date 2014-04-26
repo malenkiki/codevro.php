@@ -26,16 +26,15 @@ namespace Malenki\Codevro\Fr;
 use Malenki\Codevro\Code;
 use Malenki\Codevro\StandardSize;
 
-
 /**
  * NIR code class.
  *
- * **NIR** code stands for **Numéro d’Inscription au Répertoire** also known as 
+ * **NIR** code stands for **Numéro d’Inscription au Répertoire** also known as
  * **Numéro de Sécurité Sociale** and it is unique for each french citizens.
  *
  * @see http://fr.wikipedia.org/wiki/Num%C3%A9ro_de_s%C3%A9curit%C3%A9_sociale_en_France
- * 
- * @author Michel Petit <petit.michel@gmail.com> 
+ *
+ * @author Michel Petit <petit.michel@gmail.com>
  * @license MIT
  */
 class Nir extends Code implements StandardSize
@@ -45,32 +44,29 @@ class Nir extends Code implements StandardSize
         parent::__construct(preg_replace('/[^0-9AB]/', '', $str));
     }
 
-	/**
+    /**
      * For Corsica, letters `A` and `B` are in use, so a conversion must be apply to the code:
      *  - replace `A` and `B` letters by digit `0`
      *  - if letter A was used, then substract the code by 1,000,000
      *  - if letter B was used, then substract the code by 2,000,000
-	 * 
-	 * @param string $str
+     *
+     * @param  string $str
      * @return string
-	 */
+     */
     private static function adapt($str)
     {
-		$substract = 0;
-		
-		if(preg_match('/[Aa]/', $str)){
-			$substract = 1000000;
-		}
-		elseif(preg_match('/[Bb]/', $str)){
-			$substract = 2000000;
-		}
-		
-		$int = preg_replace('/[AaBb]/', '0', $str);
-		
-		return bcsub($int, $substract);
-	}
-	
+        $substract = 0;
 
+        if (preg_match('/[Aa]/', $str)) {
+            $substract = 1000000;
+        } elseif (preg_match('/[Bb]/', $str)) {
+            $substract = 2000000;
+        }
+
+        $int = preg_replace('/[AaBb]/', '0', $str);
+
+        return bcsub($int, $substract);
+    }
 
     /**
      * Checks NIR validity.
@@ -80,24 +76,21 @@ class Nir extends Code implements StandardSize
      */
     public function check()
     {
-        if(!extension_loaded('bcmath'))
-        {
+        if (!extension_loaded('bcmath')) {
             throw new \RuntimeException('You must have `bcmath` module installed in order to use ' . __CLASS__);
         }
 
-		$key = substr($this->str_value, 13, 2);
+        $key = substr($this->str_value, 13, 2);
         $str = self::adapt(substr($this->str_value, 0, 13));
 
-	    return ($key == bcsub(97, bcmod($str, 97)));
-	}
-
-
+        return ($key == bcsub(97, bcmod($str, 97)));
+    }
 
     /**
      * Checks NIR code length.
      *
      * NIR code must have 15 digits.
-     * 
+     *
      * @access public
      * @return boolean
      */

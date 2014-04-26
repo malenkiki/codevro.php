@@ -79,7 +79,6 @@ class BankNotePrintingWorks extends Code implements StandardSize
         return $arr_countries[$this->str_value[0]];
     }
 
-
     public function getPrintingFacility()
     {
         $arr_printers = array(
@@ -107,7 +106,6 @@ class BankNotePrintingWorks extends Code implements StandardSize
         return (integer) substr($this->str_value, 1, 3);
     }
 
-
     public function getRow()
     {
         return (integer) $this->str_value[5];
@@ -120,28 +118,15 @@ class BankNotePrintingWorks extends Code implements StandardSize
 
     public function check()
     {
-        if(!in_array($this->str_value[0], self::$arr_allow_first_letters))
-        {
+        if (!in_array($this->str_value[0], self::$arr_allow_first_letters)) {
             throw new Exception(_('Printing facility letter is not valid.'));
-        }
-
-        elseif(!preg_match('/^[0-9]{3}$/', substr($this->str_value, 1, 3)))
-        {
+        } elseif (!preg_match('/^[0-9]{3}$/', substr($this->str_value, 1, 3))) {
             throw new Exception(_('The printing plate part must contain only 3 digits.'));
-        }
-
-        elseif(!in_array($this->str_value[4], array_keys(self::$arr_columns)))
-        {
+        } elseif (!in_array($this->str_value[4], array_keys(self::$arr_columns))) {
             throw new Exception(_('The column must be a valid letter.'));
-        }
-
-        elseif(!preg_match('/[0-9]/', $this->str_value[5]))
-        {
+        } elseif (!preg_match('/[0-9]/', $this->str_value[5])) {
             throw new Exception(_('The row must be a digit.'));
-        }
-
-        else
-        {
+        } else {
             return true;
         }
     }
@@ -150,5 +135,5 @@ class BankNotePrintingWorks extends Code implements StandardSize
     {
         return $this->getLength() == 6;
     }
-    
+
 }

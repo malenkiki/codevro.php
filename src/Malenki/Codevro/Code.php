@@ -25,24 +25,24 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 namespace Malenki\Codevro;
 
 /**
- * Code basic root class. 
- * 
- * This defines the minimal structure to a code, i.e. its value, length, check 
+ * Code basic root class.
+ *
+ * This defines the minimal structure to a code, i.e. its value, length, check
  * method and string context.
  *
  * So, every child class cat get value, get length, do check and has a string behaviour.
  *
  * @abstract
- * @package 
+ * @package
  * @copyright 2013 Michel Petit
- * @author Michel Petit <petit.michel@gmail.com> 
+ * @author Michel Petit <petit.michel@gmail.com>
  * @license MIT
  */
 abstract class Code
 {
     /**
      * Stores code's value.
-     * 
+     *
      * @var string
      * @access protected
      */
@@ -50,20 +50,16 @@ abstract class Code
 
     /**
      * Stores code's length.
-     * 
+     *
      * @var integer
      * @access protected
      */
     protected $int_length = 0;
 
-
-
     public function __get($name)
     {
-        if(in_array($name, array('value', 'length')))
-        {
-            if($name == 'value')
-            {
+        if (in_array($name, array('value', 'length'))) {
+            if ($name == 'value') {
                 return $this->str_value;
             }
 
@@ -71,12 +67,10 @@ abstract class Code
         }
     }
 
-
-
     /**
-     * Constructor sets code's value and compute internally its length. 
-     * 
-     * @param string $str 
+     * Constructor sets code's value and compute internally its length.
+     *
+     * @param  string $str
      * @access public
      * @return void
      */
@@ -90,7 +84,7 @@ abstract class Code
 
     /**
      * Output code's primitive value.
-     * 
+     *
      * @access public
      * @return string
      */
@@ -99,11 +93,9 @@ abstract class Code
         return $this->str_value;
     }
 
-
-
     /**
-     * Gets the code's length. 
-     * 
+     * Gets the code's length.
+     *
      * @access public
      * @return integer
      */
@@ -112,25 +104,20 @@ abstract class Code
         return $this->int_length;
     }
 
-
-
     /**
      * Check method signature.
      *
      * Every child class must implement this check methods to tests the code.
-     * 
+     *
      * @abstract
      * @access public
      * @return boolean
      */
     abstract public function check();
 
-
-
-
     /**
-     * How the code must be shown in string context. 
-     * 
+     * How the code must be shown in string context.
+     *
      * @access public
      * @return string
      */

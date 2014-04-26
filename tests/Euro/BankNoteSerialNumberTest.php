@@ -22,8 +22,6 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
-
 class BankNoteSerialNumberTest extends PHPUnit_Framework_TestCase
 {
     /**
@@ -33,8 +31,6 @@ class BankNoteSerialNumberTest extends PHPUnit_Framework_TestCase
     {
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('');
     }
-
-
 
     public function testCheck1stSeriesOK()
     {
@@ -51,7 +47,7 @@ class BankNoteSerialNumberTest extends PHPUnit_Framework_TestCase
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('U31843475132');
         $this->assertTrue($s->check());
     }
-        
+
     public function testCheck1stSeriesKO()
     {
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('u23762095871');
@@ -68,44 +64,42 @@ class BankNoteSerialNumberTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($s->check());
     }
 
-
     public function testCheck2ndSeriesOK()
     {
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('ZB0513298374');
         $this->assertTrue($s->check());
-        
+
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('VA0436214792');
         $this->assertTrue($s->check());
-        
+
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('UB1016471792');
         $this->assertTrue($s->check());
-        
+
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('UE2134352573');
         $this->assertTrue($s->check());
-        
+
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('UA1103077083');
         $this->assertTrue($s->check());
-        
+
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('UB8102860643');
         $this->assertTrue($s->check());
-        
+
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('UE7053249824');
         $this->assertTrue($s->check());
-        
+
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('NA3802962421');
         $this->assertTrue($s->check());
     }
-
 
     public function testCheck2ndSeriesKO()
     {
 
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('zb0513298374');
         $this->assertFalse($s->check());
-        
+
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('va0436214792');
         $this->assertFalse($s->check());
-        
+
         $s = new Malenki\Codevro\Euro\BankNoteSerialNumber('ub1016471792');
         $this->assertFalse($s->check());
     }

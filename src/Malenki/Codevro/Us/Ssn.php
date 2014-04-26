@@ -31,7 +31,7 @@ use \Exception;
 /*
  * TODO: à titre indicatif, indiquer pour les SSN d’avant 2011 le nom de l’État en fonction de l’Area Group
  *
-  001-003 NH    400-407 KY    530     NV 
+  001-003 NH    400-407 KY    530     NV
   004-007 ME    408-415 TN    531-539 WA
   008-009 VT    416-424 AL    540-544 OR
   010-034 MA    425-428 MS    545-573 CA
@@ -50,8 +50,8 @@ use \Exception;
   261-267 FL    518-519 ID    627-645 TX
   268-302 OH    520     WY    646-647 UT
   303-317 IN    521-524 CO    648-649 NM
-  318-361 IL    525     NM    *Guam, American Samoa, 
-  362-386 MI    526-527 AZ     Philippine Islands, 
+  318-361 IL    525     NM    *Guam, American Samoa,
+  362-386 MI    526-527 AZ     Philippine Islands,
   387-399 WI    528-529 UT     Northern Mariana Islands
 
   650-699 unassigned, for future use
@@ -62,7 +62,7 @@ use \Exception;
           to federal control, but current SSA documents claim no
           numbers above 799 have ever been used.
 
- * 
+ *
  */
 class Ssn extends Code implements StandardSize, Formatable
 {
@@ -102,74 +102,45 @@ class Ssn extends Code implements StandardSize, Formatable
         '549241889'
     );
 
-
-
     public function check()
     {
-        if($this->getArea() == '000')
-        {
+        if ($this->getArea() == '000') {
             throw new Exception(_('SSN Area part cannot have three times the 0 digit.'));
-        }
-
-        elseif($this->getGroup() == '00')
-        {
+        } elseif ($this->getGroup() == '00') {
             throw new Exception(_('SSN Group part cannot contain only 0 digits.'));
-        }
-
-        elseif($this->getSerial() == '0000')
-        {
+        } elseif ($this->getSerial() == '0000') {
             throw new Exception(_('SSN Serial part cannot contain the digit 0 four times.'));
-        }
-
-        elseif($this->getArea() == '666')
-        {
+        } elseif ($this->getArea() == '666') {
             throw new Exception(_('SSN Area part cannot be 666.'));
-        }
-
-        elseif(in_array($this->getValue(), self::$arr_invalids))
-        {
+        } elseif (in_array($this->getValue(), self::$arr_invalids)) {
             throw new Exception(_('This SSN has invalidated by use in advertising'));
-        }
-        
-        elseif(in_array($this->getValue(), self::$arr_only_for_ads))
-        {
+        } elseif (in_array($this->getValue(), self::$arr_only_for_ads)) {
             throw new Exception(_('This SSN has to be use only into advertisings, it is not a real SSN.'));
         }
-        
+
         // pas sûr de moi, je dois vérifier mes sources…
-        elseif(in_array($this->getArea(), range('900', '999')))
-        {
+        elseif (in_array($this->getArea(), range('900', '999'))) {
             throw new Exception(_('SSN Area Part connot be into the range 900-999.'));
-        }
-        else
-        {
+        } else {
             return true;
         }
-        
+
     }
-
-
 
     public function checkSize()
     {
         return $this->getLength() == 9;
     }
 
-
-
     public function getArea()
     {
         return substr($this->getValue(), 0, 3);
     }
 
-
-
     public function getGroup()
     {
         return substr($this->getValue(), 3, 2);
     }
-
-
 
     public function getSerial()
     {
@@ -179,8 +150,8 @@ class Ssn extends Code implements StandardSize, Formatable
     public function format()
     {
         return sprintf(
-            '%03d-%02d-%04d', 
-            substr($this->str_value, 0, 3), 
+            '%03d-%02d-%04d',
+            substr($this->str_value, 0, 3),
             substr($this->str_value, 3, 2),
             substr($this->str_value, 5)
         );

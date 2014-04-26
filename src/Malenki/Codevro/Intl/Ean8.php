@@ -34,7 +34,6 @@ class Ean8 extends Ean implements StandardSize, Formatable
         parent::__construct(preg_replace('/[^0-9]/', '', $str));
     }
 
-
     public function checkSize()
     {
         return $this->getLength() == 8;
@@ -45,4 +44,3 @@ class Ean8 extends Ean implements StandardSize, Formatable
         return implode('-', str_split($this->str_value, 4));
     }
 }
-

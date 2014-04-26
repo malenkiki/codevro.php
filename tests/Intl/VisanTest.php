@@ -22,8 +22,6 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
-
 /**
  * Some examples: Inception: 0000-0002-B3C8-0000-3-0000-0000-S
  * Stargate Atlantis - Season 1 - Disc 2: 0000-0000-DDB0-0069-Q-0000-0000-X
@@ -46,7 +44,6 @@ class VisanTest extends PHPUnit_Framework_TestCase
         $s = new Malenki\Codevro\Intl\Visan('00000000EB930000Q00000000X');
     }
 
-
     public function testCheckingGoogVisanMustSuccess()
     {
         $s = new Malenki\Codevro\Intl\Visan('00000002B3C80000300000000S');
@@ -64,8 +61,7 @@ class VisanTest extends PHPUnit_Framework_TestCase
         $s = new Malenki\Codevro\Intl\Visan('00000000EB930000Q00000000X');
         $this->assertTrue($s->check());
     }
-    
-    
+
     public function testCheckingBadVisanMustFail()
     {
         $s = new Malenki\Codevro\Intl\Visan('00000002B3C80000300000000X');
@@ -83,7 +79,6 @@ class VisanTest extends PHPUnit_Framework_TestCase
         $s = new Malenki\Codevro\Intl\Visan('00000000AB930000Q00000000X');
         $this->assertFalse($s->check());
     }
-
 
     public function testGettingVersionPartSouldBeRightPart()
     {
@@ -103,7 +98,6 @@ class VisanTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('00000000', $s->getVersion());
         $this->assertEquals('00000000', $s->version);
     }
-    
 
     public function testFormatedVisanShouldBeWellFormated()
     {
@@ -137,4 +131,3 @@ class VisanTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('URN:ISAN:0000-0002-B3C8-0000-3-0000-0000-S', $s->urn);
     }
 }
-

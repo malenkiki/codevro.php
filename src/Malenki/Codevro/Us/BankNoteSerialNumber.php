@@ -27,8 +27,8 @@ use Malenki\Codevro\StandardSize;
 use \Exception;
 
 /**
- * USBill 
- * 
+ * USBill
+ *
  *
  * The first letter of the prefix denotes the currency series.
  * The second letter of the prefix indicates the Federal Reserve Bank at which the bill was produced.
@@ -61,49 +61,39 @@ class BankNoteSerialNumber extends Code implements StandardSize
     protected $sequential_number = null;
     protected $sequence_code = null;
 
-    
-    
     public function check()
     {
-        if(!preg_match('/[AGBHCIDJEKFL]/', $this->str_value[1]))
-        {
+        if (!preg_match('/[AGBHCIDJEKFL]/', $this->str_value[1])) {
             throw new Exception(_('Invalid Federal Reserve Bank Code.'));
         }
 
-        if($this->getSequenceCode() == 'O')
-        {
+        if ($this->getSequenceCode() == 'O') {
             throw new Exception(_('Invalid Sequence Code.'));
         }
-        
+
         return (boolean) preg_match(
             '/^[A-Z][AGBHCIDJEKFL][0-9]{8}[ABCDEFGHIJKLMNPQRSTUVWXYZ]$/',
             $this->str_value
         );
     }
 
-    
-    
     public function checkSize()
     {
         return $this->getLength() == 11;
     }
 
-    
-    
     public function getCurrencySeries()
     {
-        if(is_null($this->currency_series))
-        {
+        if (is_null($this->currency_series)) {
             $this->currency_series = $this->str_value[0];
         }
 
         return $this->currency_series;
     }
-    
+
     public function getFederalReserveBankCode()
     {
-        if(is_null($this->federal_reserve_bank_code))
-        {
+        if (is_null($this->federal_reserve_bank_code)) {
             $this->federal_reserve_bank_code = $this->str_value[1];
         }
 
@@ -112,8 +102,7 @@ class BankNoteSerialNumber extends Code implements StandardSize
 
     public function getFederalReserveBankName()
     {
-        if(is_null($this->federal_reserve_bank_code))
-        {
+        if (is_null($this->federal_reserve_bank_code)) {
             $arr_frbcl = array(
                 'A' => _('Boston'),
                 'B' => _('New York'),
@@ -136,8 +125,7 @@ class BankNoteSerialNumber extends Code implements StandardSize
 
     public function getSequentialNumber()
     {
-        if(is_null($this->sequential_number))
-        {
+        if (is_null($this->sequential_number)) {
             $this->sequential_number = substr($this->str_value, 2, 8);
         }
 
@@ -146,8 +134,7 @@ class BankNoteSerialNumber extends Code implements StandardSize
 
     public function getSequenceCode()
     {
-        if(is_null($this->sequence_code))
-        {
+        if (is_null($this->sequence_code)) {
             $this->sequence_code = $this->value[strlen($this->str_value) - 1];
         }
 

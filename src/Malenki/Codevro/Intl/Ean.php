@@ -22,12 +22,11 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
 namespace Malenki\Codevro\Intl;
 
 use Malenki\Codevro\Code;
 
-class Ean extends Code 
+class Ean extends Code
 {
     public function check()
     {
@@ -38,22 +37,17 @@ class Ean extends Code
         $int_sum_no_weights = 0;
 
         // Carefull! position starts from 0 not from 1, so even, odd are inverted here.
-        foreach($arr_str as $k => $v)
-        {
-            if($k % 2)
-            {
+        foreach ($arr_str as $k => $v) {
+            if ($k % 2) {
                 $int_sum_no_weights += $v;
-            }
-            else
-            {
+            } else {
                 $int_sum_weights += $v;
             }
         }
 
         $int_calculated_key = 10 - (($int_sum_no_weights + 3 * $int_sum_weights) % 10);
 
-        if($int_calculated_key == 10)
-        {
+        if ($int_calculated_key == 10) {
             $int_calculated_key = 0;
         }
 

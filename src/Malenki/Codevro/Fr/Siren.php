@@ -27,17 +27,15 @@ use Malenki\Codevro\Code;
 use Malenki\Codevro\StandardSize;
 use Malenki\Codevro\Luhn;
 
-
-
 /**
  * Siren french code identifies enterprises.
  *
- * It is composed of 9 digits, sometimes grouped by 3, and it is checkable 
+ * It is composed of 9 digits, sometimes grouped by 3, and it is checkable
  * using the Luhn algorithm.
- * 
+ *
  * Examples: 493597579, 732829320, 493 597 579, 732 829 320 are OK
  *
- * @author Michel Petit <petit.michel@gmail.com> 
+ * @author Michel Petit <petit.michel@gmail.com>
  * @license MIT
  */
 class Siren extends Luhn implements StandardSize
@@ -47,10 +45,8 @@ class Siren extends Luhn implements StandardSize
         parent::__construct(preg_replace('/[^0-9]/', '', $str));
     }
 
-
     public function checkSize()
     {
         return $this->getLength() == 9;
     }
 }
-

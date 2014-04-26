@@ -40,21 +40,18 @@ class Isan extends Code implements Formatable, StandardSize
 
         $arr = str_split(strtolower(substr($str, 0, strlen($str) - 1)));
 
-        foreach($arr as $i => $c)
-        {
+        foreach ($arr as $i => $c) {
             $int_s = is_numeric($c) ? (int) $c : ord($c) - 87;
 
             $int_s += ($i > 0) ? $int_ap : $int_mod_two;
-            
+
             $int_as = $int_s;
 
-            if($int_s >= $int_mod_two)
-            {
+            if ($int_s >= $int_mod_two) {
                 $int_as -= $int_mod_two;
             }
 
-            if($int_as == 0)
-            {
+            if ($int_as == 0) {
                 $int_as = $int_mod_two;
             }
 
@@ -62,60 +59,49 @@ class Isan extends Code implements Formatable, StandardSize
 
             $int_ap = $int_p;
 
-            if($int_p >= $int_mod_one)
-            {
+            if ($int_p >= $int_mod_one) {
                 $int_ap -= $int_mod_one;
             }
         }
-            
-        if($int_ap == 1)
-        {
+
+        if ($int_ap == 1) {
             return (string) 0;
         }
 
         $int_sub = $int_mod_one - $int_ap;
 
-        if($int_sub < 10)
-        {
+        if ($int_sub < 10) {
             return (string) $int_sub;
-        }
-        else
-        {
+        } else {
             return chr($int_sub + 55);
         }
     }
 
-
-
     public function __get($name)
     {
-        if(in_array($name, array('root', 'episode', 'urn')))
-        {
+        if (in_array($name, array('root', 'episode', 'urn'))) {
             $str = 'get' . ucfirst($name);
+
             return $this->$str();
         }
 
         return parent::__get($name);
     }
 
-
     public function getRoot()
     {
         return substr($this->str_value, 0, 12);
     }
-
 
     public function getEpisode()
     {
         return substr($this->str_value, 12, 4);
     }
 
-
     public function getUrn()
     {
         return preg_replace('/^ISAN\s+/', 'URN:ISAN:', $this->format());
     }
-
 
     public function format()
     {
@@ -130,19 +116,15 @@ class Isan extends Code implements Formatable, StandardSize
         );
     }
 
-
     public function check()
     {
         return (array_pop(str_split($this->str_value)) == self::computeCheckDigit($this->str_value)) && $this->checkSize();
     }
 
-
-
     public function checkSize()
     {
         return $this->getLength() == 17;
     }
-
 
     public function __toString()
     {

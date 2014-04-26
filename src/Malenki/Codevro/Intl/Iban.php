@@ -33,21 +33,16 @@ implements \Malenki\Codevro\Formatable
         $arr_str = str_split(substr($this->str_value,4) . substr($this->str_value,0,4));
         $str = '';
 
-        foreach($arr_str as $c)
-        {
-            if(preg_match('/[A-Z]/', $c))
-            {
+        foreach ($arr_str as $c) {
+            if (preg_match('/[A-Z]/', $c)) {
                 $str .= ord($c) - 55;
-            }
-            else
-            {
+            } else {
                 $str .= $c;
             }
         }
 
         return ((integer) bcmod($str, 97)) == 1;
     }
-
 
     public function getCountry()
     {
@@ -68,13 +63,11 @@ implements \Malenki\Codevro\Formatable
         $str = '';
         $arr = str_split($this->str_value);
 
-        foreach($arr as $k => $v)
-        {
+        foreach ($arr as $k => $v) {
             $k++;
             $str .= $v;
 
-            if($k % 4 == 0)
-            {
+            if ($k % 4 == 0) {
                 $str .= ' ';
             }
         }
