@@ -32,3 +32,6 @@ TODO
  - timestamp unix ! ;-) <https://en.wikipedia.org/wiki/Unix_time> qui donne la conversion de la date
  - reconnaissance du code morse, lib php là <https://github.com/rexxars/morse-php> :-)
  - Pinying ? <https://packagist.org/packages/overtrue/pinyin> <https://packagist.org/packages/yurunsoft/chinese-util>
+ - séquence ADN -> acides aminées
+ - forme courte de acide aminée
+ - forme codage des constellations
