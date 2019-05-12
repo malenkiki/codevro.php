@@ -1,0 +1,34 @@
+TODO
+====
+
+ - Ajouter des codes d’entreprise, comme les ASIN d’Amazone et rediriger vers eux (It is a unique sequence of 10 letters/numbers or both which is a big help for business partners in the field of e-commerce, even though the ASIN is not internationally standardised. <https://www.amazon.fr/gp/help/customer/display.html?ie=UTF8&nodeId=201889580>) 
+ - Texte descriptif à minima en anglais et en français des différents codes
+ - reconnaissance des UUID <https://en.wikipedia.org/wiki/Universally_unique_identifier> (`123e4567-e89b-12d3-a456-426655440000`) et de ses avatars (Microsoft GUID `{123e4567-e89b-12d3-a456-426655440000}` et RFC 4122 `urn:uuid:123e4567-e89b-12d3-a456-426655440000`)
+ - reconnaissance des IPv4 et IPv6
+ - reconnaissance des couleurs hexa (et donner leur éventuelles conversions en hls e compagnie…)
+ - code iso pays
+ - code départements français selon INSEE (et fournir des liens)
+ - code communes selon INSEE (et fournir des liens)
+ - code des états états-uniens (formes longues et courtes) <https://abbreviations.yourdictionary.com/articles/state-abbrev.html>
+ - faire les différents GTIN disponibles (https://fr.wikipedia.org/wiki/Global_Trade_Item_Number)
+ - UPC (Universal Product Code) 
+ - Fusionner avec ce que j’ai fait au sujet des plaques minéralogiques de différent pays
+ - les préfixes téléphoniques internationnaux (+33, etc.)
+ - reconnaissnce des couleurs pentones ?  <https://www.pantone.com/color-finder#/pick?pantoneBook=pantoneSolidCoatedV3M2>
+ - Reconnaissance des éléments chimiques de base (C, H, Mg, etc.) et proposer des liens idoines
+ - Reconnaissance d’éventuelles formules chimiques ?  Rediriger alors vers PubChem <https://pubchem.ncbi.nlm.nih.gov/#query=H2O>
+ - Voir ce qu’on peut faire avec le système de codage des hiéroglyphes :-) <https://fr.wikipedia.org/wiki/Manuel_de_codage_des_textes_hi%C3%A9roglyphiques_en_vue_de_leur_saisie_informatique>
+ - Reconnaissance des extensions de fichier et rediriger vers <https://fileinfo.com/extension/json> (Plus d’info sur <https://en.wikipedia.org/wiki/List_of_file_formats> aussi)
+ - les différents formats de tailles de feuilles de papier (A4, B2, etc.)
+ - reconnaissance des codes des additifs alimentaires en EXXX (E202, etc.) <https://fr.wikipedia.org/wiki/Liste_des_additifs_alimentaires>
+ - code ISO des langues
+ - code des droits UNIX (`-rwxr-x-r--` par exemple) J’avais fait une lib quelque part à ce sujet
+ - code des lander allemands <https://fr.wikipedia.org/wiki/Land_(Allemagne)>
+ - code utf8 et ascii
+ - liste des codes AITA des aéroports <https://fr.wikipedia.org/wiki/Liste_des_codes_AITA_des_a%C3%A9roports/M>
+ - reconnaissance des code VIN <https://www.paycar.fr/guide-auto/carte-grise-code-vin-trouver/> <https://fr.wikipedia.org/wiki/Vehicle_Identification_Number> <https://fr.wikipedia.org/wiki/Code_constructeur-WMI>
+ - reconnaissance des adresses MAC <https://fr.wikipedia.org/wiki/Adresse_MAC>
+ - reconnaissance des différentes sommes de hashage, histoire de dire ce que c’est (MD5, SHA1, etc.)
+ - timestamp unix ! ;-) <https://en.wikipedia.org/wiki/Unix_time> qui donne la conversion de la date
+ - reconnaissance du code morse, lib php là <https://github.com/rexxars/morse-php> :-)
+ - Pinying ? <https://packagist.org/packages/overtrue/pinyin> <https://packagist.org/packages/yurunsoft/chinese-util>

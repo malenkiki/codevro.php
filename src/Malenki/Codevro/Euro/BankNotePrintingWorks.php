@@ -59,6 +59,7 @@ class BankNotePrintingWorks extends Code implements StandardSize
 
     public function getCountry()
     {
+        // TODO utiliser un code ISO en lieu et place de nom de pays
         $arr_countries = array(
             'F' =>	_('Austria'),
             'T' =>	_('Belgium'),
@@ -81,6 +82,7 @@ class BankNotePrintingWorks extends Code implements StandardSize
 
     public function getPrintingFacility()
     {
+        // TODO les noms n’ont pas à être traduits
         $arr_printers = array(
             'F' => _('Osterreichische Banknoten und Sicherheitsdruck GmbH'),
             'T' => _('Banque Nationale de Belgique'),
